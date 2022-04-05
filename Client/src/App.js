@@ -17,7 +17,7 @@ function App() {
       <img src={product.image} alt={product.name}/>
       </a>
       <div className="product-info">
-      <a href={`/product/${product.slug}`}
+      <a href={`/product/${product.slug}`}>
       <p>{product.name}</p>
       </a>
       <p><strong>${product.price}</strong></p>
