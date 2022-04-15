@@ -175,8 +175,7 @@ const[{loading},dispatch]=useReducer(reducer,{
     <div className="d-grid">
     <Button type="button"
     onClick={placeOrderHandler}
-    disabled={cart.cartItems.length === 0}
-    
+    disabled={cart.cartItems.length === 0}    
     >
     Place Order
     </Button>

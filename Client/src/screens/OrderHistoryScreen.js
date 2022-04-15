@@ -7,6 +7,8 @@ import MessageBox from '../components/MessageBox'
 import { Store } from '../Store'
 import { getError } from '../utils'
 import Button from "react-bootstrap/Button";
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 
 const reducer=(state,action)=>{
     switch(action.type){
@@ -52,21 +54,23 @@ export default function OrderHistoryScreen() {
     <title>Order History</title>
     </Helmet>
 
-    <h1>Order History</h1>
+    <h1 className='text-center mb-3'>Order History</h1>
     {loading?(
         <LoadingBox></LoadingBox>
     ):error?(
         <MessageBox variant="danger">{error}</MessageBox>
     ):(
+        <Row>
+        <Col md={12} >
         <table className="table">
         <thead>
         <tr>
-        <th>ID</th>
-        <th>DATE</th>
-        <th>TOTAL</th>
-        <th>PAID</th>
-        <th>DELIVERED</th>
-        <th>ACTIONS</th>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Total</th>
+        <th>Paid</th>
+        <th>Delivered</th>
+        <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -92,6 +96,8 @@ export default function OrderHistoryScreen() {
         ))}
         </tbody>
         </table>
+        </Col>
+        </Row>
     )}
     
     </div>

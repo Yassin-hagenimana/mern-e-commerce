@@ -1,6 +1,6 @@
 import React from "react"
 export default function Rating(props){
-    const { rating , numReviews} = props
+    const { rating , numReviews,caption} = props
     return(
         <div className="rating">
          <span>
@@ -59,18 +59,24 @@ export default function Rating(props){
 
          <span>
          <i
-         className=
-         {
+        className=
+        {
             rating>=5
             ?'fas fa-star':
             rating>=4.5?
             'fas fa fa-star-half-alt':
             'far fa-star'
         }
-        
+    
         />
-         </span>
-         <span>{numReviews} Reviews</span>
+        </span>
+        {caption?(
+            <span>{caption}</span>
+        ):(
+            <span>{' ' + numReviews + ' Reviews'}</span>
+        )
+
+        }
         </div>
     )
 }

@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "name": "server",
+  "version": "1.0.0",
+  "description": "ecommerce",
+  "main": "Server.js",
+  "scripts": {
+    "build":"cd Server && npm install  && cd ../Client && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node Server/server.js"
+  },
+  "author": "yassin"
+}

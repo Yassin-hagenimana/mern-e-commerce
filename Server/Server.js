@@ -5,6 +5,7 @@ import seedRouter from "./routes/seedRouter.js"
 import productRoutes from "./routes/productRoutes.js"
 import userRouter from "./routes/userRoutes.js"
 import orderRouter from "./routes/OrderRoutes.js"
+//import path from "path"
 const port=process.env.PORT || 5000
 
 dotenv.config()
@@ -29,6 +30,12 @@ app.use("/api/seed",seedRouter)
 app.use("/api/products",productRoutes)
 app.use("/api/users",userRouter)
 app.use("/api/orders",orderRouter)
+
+// const __dirname=path.resolve()
+// app.use(express.static(path.join(__dirname, "/Client/build")))
+// app.get("*",(req,res)=>{
+//     res.sendFile(path.join(__dirname, "/Client/build/index.html"))
+// })
 
 
 app.use((err,req,res,next)=>{
