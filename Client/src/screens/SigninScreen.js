@@ -29,7 +29,7 @@ export default function SigninScreen(){
 })
 ctxDispatch({type:"USER_SIGNIN",payload:data})
 localStorage.setItem("userInfo",JSON.stringify(data))
-navigate(redirect || '/')
+navigate(redirect || '/cart')
 }catch(err){
 toast.error(getError(err))
 }
@@ -43,7 +43,7 @@ useEffect(() => {
     return(
         <Container className="small-container">
         <Helmet>
-        <title>Signin</title>
+        <title>Sign In</title>
         </Helmet>
         <h1 className="my-3">Sign In</h1>
         <Form onSubmit={submitHandler}>

@@ -1,6 +1,5 @@
-import React from "react"
+import React,{ useContext,useState,useEffect } from "react"
 import './App.css';
-import { useContext,useState,useEffect } from 'react';
 import HomeScreen from  "./screens/HomeScreen";
 import ProductScreen from './screens/ProductScreen';
 import { BrowserRouter,Routes,Route, Link} from "react-router-dom";
@@ -8,7 +7,7 @@ import Navbar from "react-bootstrap/Navbar"
 import Container from "react-bootstrap/Container"
 import Badge from "react-bootstrap/Badge"
 import Nav from "react-bootstrap/Nav"
-import NavDropDown from "react-bootstrap/NavDropDown"
+import NavDropdown from "react-bootstrap/NavDropdown"
 import {LinkContainer} from "react-router-bootstrap"
 import {Store} from "./Store"
 import CartScreen from "./screens/CartScreen";
@@ -27,6 +26,11 @@ import { getError } from "./utils";
 import axios from "axios";
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import AdminScreen from "./screens/AdminScreens/AdminScreen";
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
+import OrdersListScreen from "./screens/AdminScreens/OrdersListScreen"
+import UsersListScreen from "./screens/AdminScreens/UsersListScreen";
 
 
 
@@ -35,7 +39,7 @@ function App() {
   const{state,dispatch:ctxDispatch}= useContext(Store)
   const{cart,userInfo}=state
   
-  const signoutHandler =() =>{
+  const signoutHandler = () =>{
     ctxDispatch({type:"USER_SIGNOUT"})
     localStorage.removeItem('userInfo')
     localStorage.removeItem("shippingAddress")
@@ -62,7 +66,7 @@ function App() {
       ?'d-flex flex-column site-container active-cont'
       :'d-flex flex-column site-container'}>
 
-    <ToastContainer position="top-center" limit={1} />
+    <ToastContainer position="top-right" limit={1} />
     <header>
 
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -71,10 +75,10 @@ function App() {
     variant="dark"
     onClick={()=>setSidebarIsOpen(!sidebarIsOpen)}
     >
-    <i className="fas fa-bars"/>
+    <i className="fas fa-bars"></i>
     </Button>
      <LinkContainer to="/">
-     <Navbar.Brand>E-shop</Navbar.Brand>
+     <Navbar.Brand>E-Commerce</Navbar.Brand>
      </LinkContainer>
 
      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
@@ -93,26 +97,44 @@ function App() {
       
       </Link>
       {userInfo ? (
-        <NavDropDown title={userInfo.name} id="basic-nav-dropdown">
+        <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
         <LinkContainer to="/profile">
-        <NavDropDown.Item>User Profile</NavDropDown.Item>
+        <NavDropdown.Item>User Profile</NavDropdown.Item>
         </LinkContainer>
 
         <LinkContainer to="/orderhistory">
-        <NavDropDown.Item>Order History</NavDropDown.Item>
+        <NavDropdown.Item>Order History</NavDropdown.Item>
         </LinkContainer>
 
-        <NavDropDown.Divider/>
+        <NavDropdown.Divider/>
         <Link className="dropdown-item"
          to="#signout"
          onClick={signoutHandler}>
         Sign Out
         </Link>
-        </NavDropDown>
+        </NavDropdown>
       ):(
         <Link className="nav-link" to="/signin">
         Sign In
         </Link>
+      )}
+
+      {userInfo && userInfo.isAdmin && (
+        <NavDropdown title="Admin" id="admin-nav-dropdown">
+          <LinkContainer to="/admin/dashboard">
+          <NavDropdown.Item>Dashboard</NavDropdown.Item>
+          </LinkContainer>
+          <LinkContainer to="/admin/productslist">
+          <NavDropdown.Item>Products</NavDropdown.Item>
+          </LinkContainer>
+          <LinkContainer to="/admin/orderslist">
+          <NavDropdown.Item>Orders</NavDropdown.Item>
+          </LinkContainer>
+
+          <LinkContainer to="/admin/userslist">
+          <NavDropdown.Item>Users</NavDropdown.Item>
+          </LinkContainer>
+        </NavDropdown>
       )}
 
      </Nav>
@@ -122,7 +144,7 @@ function App() {
     </header>
 
 
-    <div variant="dark" className={
+    <div className={
       sidebarIsOpen?"active-nav side-navbar d-flex justify-content-between flex-wrap flex-column"
       :"side-navbar d-flex justify-content-between flex-wrap flex-column"
     }>
@@ -136,7 +158,7 @@ function App() {
       to={`/search?category=${category}`}
       onClick={()=>setSidebarIsOpen(false)}
       >
-      <Nav.Link>{category}</Nav.Link>
+      <Nav.Link className="text-white">{category}</Nav.Link>
       </LinkContainer>
       </Nav.Item>
     ))}
@@ -155,16 +177,53 @@ function App() {
          <Route path="/shipping" element={<ShippingAddressScreen/>}/>
         <Route path="/payment" element={<PaymentMethodScreen/>}/>
         <Route path="/placeorder" element={<PlaceOrderScreen/>} />
-        <Route path="/order/:id" element={<OrderScreen/>} />
-        <Route path="/orderhistory" element={<OrderHistoryScreen/>}/>
-        <Route path="/profile" element={<ProfileScreen/>} />
+
+        <Route path="/order/:id" element={
+          <ProtectedRoutes>
+          <OrderScreen/>
+          </ProtectedRoutes>
+        } />
+
+        <Route path="/orderhistory" element={
+          <ProtectedRoutes>
+          <OrderHistoryScreen/>
+          </ProtectedRoutes>
+        }/>
+
+
+        <Route path="/profile" element={
+          <ProtectedRoutes>
+          <ProfileScreen/>
+          </ProtectedRoutes>
+        } />
+
         <Route path="/search" element={<SearchScreen/>}/>
+    
+        {/*admin route section */}
+        <Route path="/admin/dashboard" element={
+          <AdminProtectedRoute>
+              <AdminScreen/>
+          </AdminProtectedRoute>
+        }/>
+
+        <Route path="/admin/userslist" element={
+          <AdminProtectedRoute>
+          <UsersListScreen/>
+          </AdminProtectedRoute>
+        }/>
+
+        <Route path="/admin/orderslist" element={
+          <AdminProtectedRoute>
+          <OrdersListScreen/>
+          </AdminProtectedRoute>
+        }/>
+
         </Routes>
         </Container>
     </main>
 
     <footer>
-    <div className="text-center">All rights reserved.</div>
+    <div className="text-center">@Yassin 2022 All rights reserved.</div>
     </footer>
     </div>
 

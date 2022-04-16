@@ -61,13 +61,14 @@ expressAsyncHandler(async(req,res)=>{
     }
 }))
 
-orderRouter.get("/",async(req,res)=>{
+orderRouter.get("/",isAuth ,
+expressAsyncHandler(async(req,res)=>{
     const orders= await Order.find()
     if(orders){
         res.send(orders)
     }else{
         res.status(404).send({message:"No orders found",orders})
     }
-})
+}))
 
 export default orderRouter

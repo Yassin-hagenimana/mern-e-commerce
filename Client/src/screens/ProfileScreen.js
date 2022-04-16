@@ -54,7 +54,7 @@ export default function ProfileScreen() {
             ctxDispatch({type:"USER_SIGNIN",payload:data})
             localStorage.setItem("userInfo",JSON.stringify(data))
             toast.success("User updated successfully")
-            navigate("/")
+            navigate("/profile")
         } catch (error) {
             dispatch({type:"UPDATE_FAIL"})
             toast.error(getError(error))
@@ -67,7 +67,7 @@ export default function ProfileScreen() {
     <title>User Profile</title>
     </Helmet>
 
-    <h1 className="my-3 text-center ">User Profile</h1>
+    <h3 className="my-3 text-center ">User Profile</h3>
     <form onSubmit={submitHandler}>
 
     <Form.Group className="mb-3" controlId="name">

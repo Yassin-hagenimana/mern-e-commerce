@@ -179,7 +179,7 @@ const[{loading},dispatch]=useReducer(reducer,{
     >
     Place Order
     </Button>
-    {loading && <LoadingBox/>}
+    {loading && <LoadingBox className="align-items-center"/>}
     </div>
     </ListGroup.Item>
     </ListGroup>

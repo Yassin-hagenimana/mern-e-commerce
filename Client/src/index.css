@@ -15,12 +15,15 @@ main{
 }
 .btn-primary,
 .btn-outline-primary{
-  background-color: #f0c040;
-  color: #000000;
-  border: 1px solid #f0c040;
+  background-color: #007bff;
+  color: #ffffffff;
+  border: none;
 }
 .color{
   color: #ffffffff;
+}
+li{
+  list-style: none;
 }
 
 
@@ -77,7 +80,7 @@ font-weight: bold;
   height: 100%;
   position: absolute;
   left: -300px;
-  background-color:#100901;
+  background-color:#343a40;
   transition:0.5s;
 }
 .site-container{
@@ -88,4 +91,7 @@ font-weight: bold;
 }
 .active-nav{
   left: 0;
+}
+.text-bold{
+  font-weight: bold;
 }

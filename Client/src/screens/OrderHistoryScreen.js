@@ -54,7 +54,7 @@ export default function OrderHistoryScreen() {
     <title>Order History</title>
     </Helmet>
 
-    <h1 className='text-center mb-3'>Order History</h1>
+    <h3 className='text-center mb-3'>Your Order History</h3>
     {loading?(
         <LoadingBox></LoadingBox>
     ):error?(
@@ -62,7 +62,7 @@ export default function OrderHistoryScreen() {
     ):(
         <Row>
         <Col md={12} >
-        <table className="table">
+        <table className="table w-100">
         <thead>
         <tr>
         <th>Id</th>
@@ -91,7 +91,6 @@ export default function OrderHistoryScreen() {
              Details
             </Button>
             </td>
-            
             </tr>
         ))}
         </tbody>

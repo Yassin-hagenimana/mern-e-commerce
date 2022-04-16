@@ -172,18 +172,22 @@ export default function SearchScreen() {
      <ul>
     {ratings.map((r)=>(
         <li key={r.name}>
-        <Link to={getFilterUlr({rating: r.rating})} className={`${rating}`?'text-bold': ''}>
-        <Rating caption={' & up'} rating={r.rating}></Rating>
+        <Link to={getFilterUlr({rating: r.rating})}
+        className={`${r.rating}` === `${rating}` ? 'text-bold': ''}>
+        <Rating caption={' & up'} rating={r.rating}/>
         </Link>
         </li>
     ))}
 
     <li>
-    <Link to={getFilterUlr({rating: 'all'})} className={rating=== 'all' ? 'text-bold':''}>
-    <Rating caption={' & up'} rating={0}></Rating>
+    <Link to={getFilterUlr({rating: 'all'})} 
+    className={rating === 'all' ? 'text-bold':''}>
+    <Rating caption={' & up'} rating={0}/>
     </Link>
     </li>
+
      </ul>
+
      </div>
     </Col>
 
@@ -197,7 +201,7 @@ export default function SearchScreen() {
         <Row className="justify-content-between mb-3">
         <Col md={6}>
         <div>
-        {countProducts===0?'No':countProducts} Results
+        {countProducts === 0 ? 'No': countProducts} Results
         {query !=='all' && ' : ' + query}
         {category !=='all' && ' : ' + category}
         {price !=='all' && ' : Price ' + price}
@@ -219,7 +223,7 @@ export default function SearchScreen() {
         onChange={(e)=>{navigate(getFilterUlr({order:e.target.value}))}}
         >
             <option value="newest">Newest Arrivals</option>
-            <option value="Lowest">Price: Low to High</option>
+            <option value="lowest">Price: Low to High</option>
             <option value="highest">Price: High to Low</option>
             <option value="toprated">Avg. Customer Reviews</option>
         </select>

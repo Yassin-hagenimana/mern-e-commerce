@@ -10,7 +10,7 @@ userRouter.get("/",async(req,res)=>{
     if(users){
         res.send(users)
     }else{
-        res.status(404).send({message:"NO users found"})
+        res.status(404).send({message:"No users found"})
     }
 })
 
@@ -80,4 +80,13 @@ expressAsyncHandler(async(req,res)=>{
         res.status(404).send({message:"User not found"})
     }
 }))
+
+userRouter.delete("/:id",isAuth,async(req,res)=>{
+    const user=await User.deleteOne({id:req.params.id})
+    if(user){
+        res.send(user)
+    }else{
+        res.status(404).send({message:"User not found"})
+    }
+})
 export default userRouter;
