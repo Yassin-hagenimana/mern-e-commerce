@@ -7,8 +7,8 @@ import MessageBox from '../../components/MessageBox'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import { useNavigate } from 'react-router'
 import { Helmet } from 'react-helmet-async'
+import { toast } from 'react-toastify'
 
 const reducer=(state,action)=>{
     switch(action.type){
@@ -23,7 +23,6 @@ const reducer=(state,action)=>{
     }
 }
 export default function OrdersListScreen() {
- const navigate=useNavigate()
     const[{loading,error,orders},dispatch]=useReducer(reducer,{
         loading:true,
         error:''
@@ -49,6 +48,21 @@ export default function OrdersListScreen() {
     }
     fetchData()
     },[userInfo])
+
+    const deleteHandler=async(id)=>{
+        try {
+            await axios.delete(`/api/orders/${id}`,
+            {
+                headers:{
+                    authorization: `Bearer ${userInfo.token}`
+                }
+            })
+            toast.success("Order deleted successfully.")
+            window.location.reload(false)
+        } catch (error) {
+            toast.error(getError(error))
+        }
+    }
   return (
     <div>
     <Helmet>
@@ -72,12 +86,13 @@ export default function OrdersListScreen() {
    <th>Total price</th>
    <th>Shipping Address</th>
    <th>User</th>
-    <th>Actions</th>
+   <th colSpan="2">Actions</th>
    </tr>
    </thead>
    <tbody>
    {orders.map((order)=>(
        <tr key={order._id}>
+       
         <td>{order._id}</td>
         <td>{order.isPaid? order.isPaidAt.substring(0, 10): "No"}</td>
         <td>{order.isDelivered ? order.deliveredAt.substring(0,10) : "No"}</td>
@@ -87,14 +102,20 @@ export default function OrdersListScreen() {
         <td>{order.user}</td>
         <td>
         <Button type="button"
-            variant="light"
-            className='btn-primary'
-            onClick={()=>{
-                navigate(`/order/${order._id}`)
-            }}>
-             Details
+            variant="danger"
+            className='btn-order'
+            onClick={()=>deleteHandler(order._id)}>
+            Delete
             </Button>
         </td>
+        <td>
+        <Button type="button"
+        variant="success"
+        className='btn-order'
+        >
+        Update
+        </Button>
+    </td>
        </tr>
    ))
 }

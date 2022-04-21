@@ -71,13 +71,25 @@ expressAsyncHandler(async(req,res)=>{
     }
 }))
 
-orderRouter.delete("/delete/all",async(req,res)=>{
-    const orders=await Order.deleteMany()
+orderRouter.delete("/",
+isAuth,expressAsyncHandler(async(req,res)=>{
+    const orders= await Order.deleteMany()
     if(orders){
-        res.send(orders)
+        res.send({message:"All orders deleted successfully",orders})
     }else{
-        res.status(404).send({message:"there are no orders to delete"})
+        res.status(404).send({message:"No orders found."})
     }
-})
+}))
+
+orderRouter.delete("/:id",
+isAuth,
+expressAsyncHandler(async(req,res)=>{
+    const order= await Order.deleteOne({id:req.params.id})
+    if(order){
+        res.status(201).send({message:"Order deleted",order})
+    }else{
+        res.status(404).send({message:"Order not found!"})
+    }
+}))
 
 export default orderRouter

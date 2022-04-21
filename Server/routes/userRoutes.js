@@ -84,7 +84,7 @@ expressAsyncHandler(async(req,res)=>{
 userRouter.delete("/:id",isAuth,async(req,res)=>{
     const user=await User.deleteOne({id:req.params.id})
     if(user){
-        res.send(user)
+        res.send({user,message:"User deleted"})
     }else{
         res.status(404).send({message:"User not found"})
     }

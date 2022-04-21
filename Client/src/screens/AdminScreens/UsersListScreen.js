@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useReducer } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import {getError} from "../../utils"
+import { useNavigate } from 'react-router'
 import {Store} from "../../Store"
 import axios from 'axios'
 import LoadingBox from '../../components/LoadingBox'
 import MessageBox from '../../components/MessageBox'
 import Button from 'react-bootstrap/Button'
 import { Helmet } from 'react-helmet-async'
+import { toast } from 'react-toastify'
 
 const reducer=(state,action)=>{
     switch(action.type){
@@ -30,6 +32,7 @@ const reducer=(state,action)=>{
        }
 }
 export default function UsersListScreen() {
+    const navigate=useNavigate()
     const{state}=useContext(Store)
     const{userInfo}=state
     const[{loading,error,users},dispatch]=useReducer(reducer,{
@@ -55,6 +58,22 @@ export default function UsersListScreen() {
         fetchUsers()
     },[userInfo])
 
+        const deleteHandler=async(id)=>{
+        try {
+
+            await axios.delete(`/api/users/${id}`,
+        {
+            headers:{
+                authorization: `Bearer ${userInfo.token}`
+            }
+        })
+        toast.success("User deleted successfully")
+        window.location.reload(false);
+        navigate("/admin/userslist")
+        } catch (error) {
+            toast.error(getError(error))
+        }
+    }
 
 
 return (
@@ -77,7 +96,7 @@ return (
       <th>User Id</th>
       <th>Name</th>
       <th>Email</th>
-      <th>action</th>
+      <th>Action</th>
       </tr>
       </thead>
         <tbody>
@@ -88,7 +107,10 @@ return (
              <td>{user.name}</td>
              <td>{user.email}</td>
              <td>
-             <Button variant='danger'>
+             <Button variant='danger'
+             type='button'
+             className='btn-user'
+             onClick={()=>deleteHandler(user._id)}>
                Delete
              </Button>
              </td>
