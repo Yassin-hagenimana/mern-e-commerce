@@ -29,7 +29,6 @@ export default function ProfileScreen() {
     const[email,setEmail]=useState(userInfo.email)
     const[password,setPassword]=useState('')
     const[confirmPassword,setConfirmPassword]=useState('')
-
     const[{loadingUpdate},dispatch]=useReducer(reducer,{
         loadingUpdate:false
     })
@@ -68,7 +67,7 @@ export default function ProfileScreen() {
     </Helmet>
 
     <h3 className="my-3 text-center ">User Profile</h3>
-    <form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler}>
 
     <Form.Group className="mb-3" controlId="name">
     <Form.Label>Name</Form.Label>
@@ -114,7 +113,7 @@ export default function ProfileScreen() {
     )}
     </div>
     
-    </form>
+    </Form>
     
     </div>
   )

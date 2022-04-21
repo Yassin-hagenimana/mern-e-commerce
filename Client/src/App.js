@@ -31,6 +31,7 @@ import AdminScreen from "./screens/AdminScreens/AdminScreen";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import OrdersListScreen from "./screens/AdminScreens/OrdersListScreen"
 import UsersListScreen from "./screens/AdminScreens/UsersListScreen";
+import UpdateOrder from "./screens/AdminScreens/UpdateOrder";
 
 
 
@@ -215,6 +216,12 @@ function App() {
         <Route path="/admin/orderslist" element={
           <AdminProtectedRoute>
           <OrdersListScreen/>
+          </AdminProtectedRoute>
+        }/>
+
+        <Route path="/admin/updateorder" element={
+          <AdminProtectedRoute>
+          <UpdateOrder/>
           </AdminProtectedRoute>
         }/>
 

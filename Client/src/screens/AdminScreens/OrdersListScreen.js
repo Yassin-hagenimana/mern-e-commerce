@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { Helmet } from 'react-helmet-async'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const reducer=(state,action)=>{
     switch(action.type){
@@ -23,6 +24,7 @@ const reducer=(state,action)=>{
     }
 }
 export default function OrdersListScreen() {
+    const navigate=useNavigate()
     const[{loading,error,orders},dispatch]=useReducer(reducer,{
         loading:true,
         error:''
@@ -112,7 +114,7 @@ export default function OrdersListScreen() {
         <Button type="button"
         variant="success"
         className='btn-order'
-        >
+       onClick={()=>navigate("/admin/updateorder")} >
         Update
         </Button>
     </td>
