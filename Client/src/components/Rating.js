@@ -70,6 +70,8 @@ export default function Rating(props){
     
         />
         </span>
+
+        
         {caption?(
          <span>{caption}</span>
         ):(

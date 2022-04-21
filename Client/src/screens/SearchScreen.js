@@ -174,7 +174,7 @@ export default function SearchScreen() {
         <li key={r.name}>
         <Link to={getFilterUlr({rating: r.rating})}
         className={`${r.rating}` === `${rating}` ? 'text-bold': ''}>
-        <Rating caption={' & up'} rating={r.rating}/>
+        <Rating caption={' & up'} rating={r.rating} />
         </Link>
         </li>
     ))}

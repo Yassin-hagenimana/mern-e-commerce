@@ -9,14 +9,16 @@ body {
 .site-container{
   min-height: 100vh;
 }
-
+.search{
+  border: none;
+}
 main{
   flex: 1;
 }
 .btn-primary,
 .btn-outline-primary{
-  background-color: #007bff;
-  color: #ffffffff;
+  background-color: goldenrod;
+  color: #000000;
   border: none;
 }
 .color{

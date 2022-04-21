@@ -7,6 +7,7 @@ import {useContext} from "react"
 import {Store} from "../Store.js"
 
 import axios from "axios"
+import { toast } from "react-toastify";
 export default function Product(props){
 const {product}=props;
 const{state, dispatch:ctxDispatch}=useContext(Store)
@@ -20,7 +21,7 @@ const addToCartHandler=async(item) =>{
 
     const {data} = await axios.get(`/api/products/${item._id}`)
   if(data.countInStock < quantity){
-    window.alert("Sorry, product is out of stock.")
+    toast.error("Sorry, product is out of stock.")
     return;
   }
   ctxDispatch({

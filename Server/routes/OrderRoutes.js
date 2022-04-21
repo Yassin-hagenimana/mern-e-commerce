@@ -71,4 +71,13 @@ expressAsyncHandler(async(req,res)=>{
     }
 }))
 
+orderRouter.delete("/delete/all",async(req,res)=>{
+    const orders=await Order.deleteMany()
+    if(orders){
+        res.send(orders)
+    }else{
+        res.status(404).send({message:"there are no orders to delete"})
+    }
+})
+
 export default orderRouter
