@@ -69,6 +69,7 @@ expressAsyncHandler(async(req,res)=>{
     }else{
         res.status(404).send({message:"No orders found",orders})
     }
+    console.log(order)
 }))
 
 orderRouter.delete("/",
@@ -89,6 +90,18 @@ expressAsyncHandler(async(req,res)=>{
         res.status(201).send({message:"Order deleted",order})
     }else{
         res.status(404).send({message:"Order not found!"})
+    }
+}))
+
+orderRouter.put("/delivery/:_id",
+isAuth,
+expressAsyncHandler(async(req,res)=>{
+    const updateDelivery= await Order.findById({_id:req.params._id})
+    if(updateDelivery){
+        updateDelivery.isDelivered=true || updateDelivery.isDelivered
+        updateDelivery.deliveredAt=Date.now() || updateDelivery.deliveredAt
+    }else{
+        res.status(404).send({message:"Order delivery not updated successfully"})
     }
 }))
 

@@ -114,7 +114,7 @@ export default function OrdersListScreen() {
         <Button type="button"
         variant="success"
         className='btn-order'
-       onClick={()=>navigate("/admin/updateorder")} >
+       onClick={()=>navigate(`/admin/updateorder/${order._id}`)} >
         Update
         </Button>
     </td>

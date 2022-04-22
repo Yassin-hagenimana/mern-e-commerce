@@ -178,9 +178,8 @@ function App() {
          <Route path="/shipping" element={<ShippingAddressScreen/>}/>
         <Route path="/payment" element={<PaymentMethodScreen/>}/>
         <Route path="/placeorder" element={<PlaceOrderScreen/>} />
-
         <Route path="/order/:id" element={
-          <ProtectedRoutes>
+          <ProtectedRoutes> 
           <OrderScreen/>
           </ProtectedRoutes>
         } />
@@ -219,7 +218,7 @@ function App() {
           </AdminProtectedRoute>
         }/>
 
-        <Route path="/admin/updateorder" element={
+        <Route path="/admin/updateorder/:id" element={
           <AdminProtectedRoute>
           <UpdateOrder/>
           </AdminProtectedRoute>
