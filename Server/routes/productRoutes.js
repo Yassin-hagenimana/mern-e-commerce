@@ -1,11 +1,12 @@
 import express from "express";
 import Product from "../Models/productModel.js";
 import expressAsyncHandler from "express-async-handler"
+import {isAuth} from '../utils.js'
 
 const productRouter=express.Router()
 
 productRouter.get("/",async(req,res) => {
-    const products=await Product.find()
+    const products = await Product.find()
     res.send(products)
 })
 
@@ -106,7 +107,29 @@ productRouter.get("/:id",async(req,res)=>{
     if(product){
         res.send(product)
     }else{
-        res.status(404).send({message:"Product not found"}) 
+        res.status(404).send({message:"Product not found"})
     }
 })
+
+productRouter.delete("/:id",
+isAuth,
+expressAsyncHandler(async(req,res)=>{
+    const product = await Product.deleteOne({id:req.params.id})
+    if(product){
+        res.send(product)
+    }else{
+        res.status(404).send({message:"No product found."})
+    }
+}))
+
+productRouter.put("/:_id",
+isAuth,
+expressAsyncHandler(async(req,res)=>{
+    const product= await Product.findByIdAndUpdate({_id:req.params._id},req.body,{new:true})
+    if(product){
+        res.send({message:"Product to update",product}).status(201)
+    }else{
+        res.status(404).send({message:"Product with id not found"})
+    }
+}))
 export default productRouter

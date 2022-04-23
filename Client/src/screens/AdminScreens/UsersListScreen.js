@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useReducer } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import {getError} from "../../utils"
-import { useNavigate } from 'react-router'
 import {Store} from "../../Store"
 import axios from 'axios'
 import LoadingBox from '../../components/LoadingBox'
@@ -32,7 +31,6 @@ const reducer=(state,action)=>{
        }
 }
 export default function UsersListScreen() {
-    const navigate=useNavigate()
     const{state}=useContext(Store)
     const{userInfo}=state
     const[{loading,error,users},dispatch]=useReducer(reducer,{
@@ -69,7 +67,6 @@ export default function UsersListScreen() {
         })
         toast.success("User deleted successfully")
         window.location.reload(false);
-        navigate("/admin/userslist")
         } catch (error) {
             toast.error(getError(error))
         }

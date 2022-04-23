@@ -34,7 +34,7 @@ export default function UpdateOrder(){
 
     const[{loading,order},dispatch]=useReducer(reducer,{
         loading:true,
-        order:{},
+        order:[],
         error:""
 })
     const[setPaid]=useState()
@@ -118,6 +118,7 @@ export default function UpdateOrder(){
     <Form.Control
     required
     value={order.shippingAddress}
+
     onChange={(e)=>setShipping(e.target.value)}
     disabled
     />

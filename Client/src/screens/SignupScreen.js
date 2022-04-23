@@ -28,6 +28,9 @@ export default function SignupScreen(){
            toast.error("Passwords don't match.")
            return;
        }
+       if(email){
+         toast.error("User already exist")
+       }
        try{
            const{data} = await axios.post("/api/users/signup",{
               name,

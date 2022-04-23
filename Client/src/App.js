@@ -32,6 +32,8 @@ import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import OrdersListScreen from "./screens/AdminScreens/OrdersListScreen"
 import UsersListScreen from "./screens/AdminScreens/UsersListScreen";
 import UpdateOrder from "./screens/AdminScreens/UpdateOrder";
+import ProductsListScreen from "./screens/AdminScreens/ProductsListScreen";
+import UpdateProduct from "./screens/AdminScreens/UpdateProduct";
 
 
 
@@ -222,6 +224,18 @@ function App() {
           <AdminProtectedRoute>
           <UpdateOrder/>
           </AdminProtectedRoute>
+        }/>
+
+        <Route path="/admin/updateproduct/:id" element={
+          <AdminProtectedRoute>
+          <UpdateProduct/>
+          </AdminProtectedRoute>
+        }/>
+
+        <Route path="/admin/productslist" element={
+             <AdminProtectedRoute>
+             <ProductsListScreen/>
+             </AdminProtectedRoute>
         }/>
 
         </Routes>
