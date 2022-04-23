@@ -70,16 +70,18 @@ export default function OrdersListScreen() {
     <Helmet>
     <title>List of orders</title>
     </Helmet>
+    <div className="container">
     <h3 className='text-center mb-3'>List of all  orders</h3>
 
     {loading?(
         <LoadingBox></LoadingBox>
     ):error?(<MessageBox variant="danger">{error}</MessageBox>
     ):(
+<div className="table-responsive">
  <Row>
  <Col>
- <table className='table w-100'>
- <thead>
+ <table className='table'>
+ <thead className='table-light'>
  <tr>
    <th>Order Id</th>
    <th>Paid</th>
@@ -125,7 +127,9 @@ export default function OrdersListScreen() {
  </table>
  </Col>
  </Row>
+ </div>
 )}
+</div>
     </div>
   )
 }

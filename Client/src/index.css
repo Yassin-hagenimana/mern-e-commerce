@@ -104,3 +104,47 @@ font-weight: bold;
   text-align: center;
   padding: 2px;
 }
+.cards{
+  width: 18rem;
+  margin-left: 100px;
+  margin-top: 10%;
+  border: 1px solid black;
+  background-color: rgb(229, 229, 245);
+}
+.containers{
+  display: flex;
+  margin-bottom: 100px;
+  
+}
+.card-text{
+  text-align: justify;
+}
+.footer{
+  background: #152F4F;
+  color:white;
+}
+  .links{
+    ul {list-style-type: none;}
+    li a{
+      color: white;
+      transition: color .2s;
+      &:hover{
+        text-decoration:none;
+        color:#4180CB;
+        }
+    }
+  }  
+  i{font-size: 25px;}
+  .about-company{
+    a{
+      color:white;
+      transition: color .2s;
+      &:hover{color:#4180CB}
+    }
+  } 
+  .location{
+    i{
+      font-size:18px;
+    }
+  }
+  .copyright p{border-top:1px solid rgba(255,255,255,.1);} 
