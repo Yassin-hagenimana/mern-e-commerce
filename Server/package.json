@@ -26,7 +26,10 @@
     "lodash": "^4.17.21",
     "mongoose": "^6.2.10",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.19",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.3.0",
+    "swaggiffy": "^1.0.5",
     "uuid": "^8.3.2"
   }
 }

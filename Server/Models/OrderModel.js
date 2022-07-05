@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+import { registerSchema } from 'swaggiffy';
 const orderSchema= new mongoose.Schema({
 
     orderItems:[
@@ -56,5 +56,6 @@ const orderSchema= new mongoose.Schema({
 
 )
 
+registerSchema('Order', orderSchema, {orm: 'mongoose'});
 const Order=mongoose.model("Order",orderSchema)
 export default Order

@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { registerSchema } from 'swaggiffy';
 const userSchema=new mongoose.Schema(
     {
       name:{
@@ -24,6 +25,6 @@ const userSchema=new mongoose.Schema(
     timestamps:true
 }
 )
-
+registerSchema('User', userSchema, {orm: 'mongoose'});
 const User=mongoose.model("User",userSchema)
 export default User;

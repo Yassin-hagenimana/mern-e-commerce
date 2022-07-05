@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-
+import {registerSchema} from "swaggiffy"
 const productSchema=new mongoose.Schema(
     {
       name:{
@@ -50,5 +50,6 @@ const productSchema=new mongoose.Schema(
 }
 )
 
+registerSchema("Product",productSchema,{orm:'mongoose'})
 const Product=mongoose.model("Product",productSchema)
 export default Product;

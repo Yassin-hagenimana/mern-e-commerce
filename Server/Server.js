@@ -5,6 +5,8 @@ import seedRouter from "./routes/seedRouter.js"
 import productRoutes from "./routes/productRoutes.js"
 import userRouter from "./routes/userRoutes.js"
 import orderRouter from "./routes/OrderRoutes.js"
+import {Swaggiffy} from 'swaggiffy';
+
 //import path from "path"
 const port=process.env.PORT || 5000
 
@@ -26,6 +28,9 @@ app.use(express.urlencoded({extended:true}))
 app.get("/api/keys/paypal",(req,res)=>{
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
 })
+app.get("/",async(req,res)=>{
+    res.status(201).send("Welcome to e-commerce platform.")
+})
 
 app.use("/api/seed",seedRouter)
 app.use("/api/products",productRoutes)
@@ -46,3 +51,5 @@ res.status(500).send({err:err.message})
 app.listen(port, () => {
     console.log(`Serve at http://localhost:${port}`);
 });
+
+new Swaggiffy().setupExpress(app).swaggiffy();

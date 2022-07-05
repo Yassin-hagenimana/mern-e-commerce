@@ -2,6 +2,7 @@ import express from "express"
 import bcrypt from "bcryptjs"
 import User from "../Models/userModel.js";
 import { generateToken, isAuth } from "../utils.js";
+import { registerDefinition } from 'swaggiffy';
 import expressAsyncHandler from "express-async-handler"
 const userRouter=express.Router()
 
@@ -13,7 +14,6 @@ userRouter.get("/",async(req,res)=>{
         res.status(404).send({message:"No users found"})
     }
 })
-
 
 userRouter.post("/signin",
 expressAsyncHandler(async(req,res)=>{
@@ -57,6 +57,7 @@ expressAsyncHandler(async(req,res)=>{
 }))
 
 
+
 userRouter.put("/profile",
 isAuth,
 expressAsyncHandler(async(req,res)=>{
@@ -89,4 +90,5 @@ userRouter.delete("/:id",isAuth,async(req,res)=>{
         res.status(404).send({message:"User not found"})
     }
 })
+registerDefinition(userRouter, {tags: 'Users', mappedSchema: 'User', basePath: '/api/users'});
 export default userRouter;

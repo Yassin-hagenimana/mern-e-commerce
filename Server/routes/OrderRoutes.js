@@ -1,6 +1,7 @@
 import express from "express"
 import expressAsyncHandler from "express-async-handler"
-import Order from "../Models/OrderModel.js";
+import {registerDefinition} from "swaggiffy"
+import Order from "../Models/OrderModel.js"
 import { isAuth } from "../utils.js";
 const orderRouter=express.Router()
 
@@ -104,5 +105,8 @@ expressAsyncHandler(async(req,res)=>{
         res.status(404).send({message:"Order delivery not updated successfully"})
     }
 }))
+
+
+registerDefinition(orderRouter,{tags :'Orders',mappedSchema:'Order',basePath:'/api/orders'})
 
 export default orderRouter

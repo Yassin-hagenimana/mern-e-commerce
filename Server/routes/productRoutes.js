@@ -2,6 +2,7 @@ import express from "express";
 import Product from "../Models/productModel.js";
 import expressAsyncHandler from "express-async-handler"
 import {isAuth} from '../utils.js'
+import {registerDefinition} from "swaggiffy"
 
 const productRouter=express.Router()
 
@@ -132,4 +133,5 @@ expressAsyncHandler(async(req,res)=>{
         res.status(404).send({message:"Product with id not found"})
     }
 }))
+registerDefinition(productRouter,{tags:"Products",mappedSchema:"Product",basePath:"/api/products"})
 export default productRouter
